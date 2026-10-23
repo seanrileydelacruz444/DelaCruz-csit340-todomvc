@@ -4,6 +4,7 @@ export default function Todo()
 {
     const [text, setText] = useState('')
     const [todos, setTodos] = useState([])
+    const [item, setItem] = useState(0)
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -14,6 +15,7 @@ export default function Todo()
         const newTodo = { id: crypto.randomUUID(), text: trimmed, completed: false }
         setTodos([...todos, newTodo])
         setText('')
+        setItem(item + 1)
     }
 
     function handleToggle(id) {
@@ -22,11 +24,14 @@ export default function Todo()
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
         )
         )
+        setItem(item - 1)
     }
 
     function handleDelete(id) {
         setTodos(todos.filter((todo) => todo.id !== id))
+        setItem(item - 1)
     }
+
 
     return(
         <section className="mx-auto max-w-[550px]">
@@ -99,7 +104,7 @@ export default function Todo()
 
             <footer className="grid h-10 grid-cols-3 items-center border-t border-[#e6e6e6] px-[15px] text-[15px]">
                 <span>
-                    <strong className="font-light">1</strong> item left
+                    <strong className="font-light">{item}</strong> item left
                 </span>
 
                 <ul className="flex justify-center gap-1">
