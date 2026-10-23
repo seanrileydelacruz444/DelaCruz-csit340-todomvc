@@ -35,9 +35,15 @@ export default function Todo()
         setTodos(todos.filter((todo) => todo.completed == false))
     }
 
+    
     function filterActive()
     {
-        setTodos(todos.map((todo) => todo.completed === false ? { ...todo, completed: todo.completed } : todo))
+        setTodos(todos.filter((todo) => !todo.completed))
+    }
+
+    function filterCompleted()
+    {
+        setTodos(todos.filter((todo) => todo.completed))
     }
 
     function completeAll()
@@ -137,7 +143,7 @@ export default function Todo()
               <button
                 type="button"
                 className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
-                onClick={() => filterActive}
+                onClick={() => filterActive()}
               >
                 Active
               </button>
@@ -146,6 +152,7 @@ export default function Todo()
               <button
                 type="button"
                 className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
+                onClick={() => filterCompleted()}
               >
                 Completed
               </button>
