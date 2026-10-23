@@ -19,6 +19,14 @@ export default function Todo()
         setText('')
     }
 
+    function handleToggle(id) {
+        setTodos(
+        todos.map((todo) =>
+            todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        )
+        )
+    }
+
     return(
         <section className="mx-auto max-w-[550px]">
                 <h1 className="text-center text-[80px] font-extralight text-[#b83f45]">
@@ -57,7 +65,7 @@ export default function Todo()
                     >
                     <input
                         checked={todo.completed}
-                        readOnly
+                        onChange={() => handleToggle(todo.id)}
                     />
 
                     <span
