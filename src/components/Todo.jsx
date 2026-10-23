@@ -4,7 +4,6 @@ export default function Todo()
 {
     const [text, setText] = useState('')
     const [todos, setTodos] = useState([])
-    const [item, setItem] = useState(0)
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -34,6 +33,17 @@ export default function Todo()
     function clearAllCompleted()
     {
         setTodos(todos.filter((todo) => todo.completed == false))
+    }
+
+    function filterActive()
+    {
+        setTodos(todos.map((todo) => todo.completed === false ? { ...todo, completed: todo.completed } : todo))
+    }
+
+    function completeAll()
+    {
+        const allCompleted = todos.every((todo) => todo.completed)
+        setTodos(todos.map((todo) => ({ ...todo, completed: !allCompleted })))
     }
 
 
@@ -67,7 +77,8 @@ export default function Todo()
                     htmlFor="toggle-all"
                     className="absolute -top-[66px] left-0 flex h-[65px] w-[60px] cursor-pointer items-center justify-center text-[22px] text-[#949494] peer-checked:text-[#484848]"
                 >
-                    <span className="rotate-90">❯</span>
+                    <span className="rotate-90"
+                    onClick={() => completeAll() }>❯</span>
                 </label>
 
                 <ul>
@@ -126,6 +137,7 @@ export default function Todo()
               <button
                 type="button"
                 className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
+                onClick={() => filterActive}
               >
                 Active
               </button>
