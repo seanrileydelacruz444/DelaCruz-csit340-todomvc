@@ -31,6 +31,11 @@ export default function Todo()
         setTodos(todos.filter((todo) => todo.id !== id))
     }
 
+    function clearAllCompleted()
+    {
+        setTodos(todos.filter((todo) => todo.completed == false))
+    }
+
 
     return(
         <section className="mx-auto max-w-[550px]">
@@ -135,7 +140,9 @@ export default function Todo()
             </li>
           </ul>
 
-                <button type="button" className="cursor-pointer justify-self-end hover:underline">
+                <button 
+                type="button" className="cursor-pointer justify-self-end hover:underline"
+                onClick={() => clearAllCompleted() }>
                     Clear completed
                 </button>
 
