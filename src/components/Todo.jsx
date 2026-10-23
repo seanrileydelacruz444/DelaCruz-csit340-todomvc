@@ -15,21 +15,20 @@ export default function Todo()
         const newTodo = { id: crypto.randomUUID(), text: trimmed, completed: false }
         setTodos([...todos, newTodo])
         setText('')
-        setItem(item + 1)
     }
 
     function handleToggle(id) {
+
         setTodos(
         todos.map((todo) =>
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
         )
         )
-        setItem(item - 1)
+
     }
 
     function handleDelete(id) {
         setTodos(todos.filter((todo) => todo.id !== id))
-        setItem(item - 1)
     }
 
 
@@ -73,8 +72,10 @@ export default function Todo()
                         className="group relative flex items-center border-b border-[#ededed] text-2xl"
                     >
                     <input
+                        type="checkbox"
                         checked={todo.completed}
                         onChange={() => handleToggle(todo.id)}
+                        className="ml-[15px] size-[30px] shrink-0 cursor-pointer accent-[#59a193]"
                     />
 
                     <span
@@ -104,7 +105,7 @@ export default function Todo()
 
             <footer className="grid h-10 grid-cols-3 items-center border-t border-[#e6e6e6] px-[15px] text-[15px]">
                 <span>
-                    <strong className="font-light">{item}</strong> item left
+                    <strong className="font-light">{todos.filter((todo) => !todo.completed).length}</strong> item left
                 </span>
 
                 <ul className="flex justify-center gap-1">
