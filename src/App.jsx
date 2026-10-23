@@ -10,7 +10,7 @@ function App() {
     <>
       <div className="min-h-screen bg-[#f5f5f5] py-8 font-light text-[#111]">
         <Todo />
-        <Info name="Sean Riley Dela Cruz" />
+        <Info name="Sean Riley T. Dela Cruz" />
       </div>
     </>
   )
